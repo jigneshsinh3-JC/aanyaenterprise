@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>AANYA ENTERPRISE | Industrial Manpower & Labor Contractor</title>
+
+    <!-- Bootstrap 5.3.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- FontAwesome 6.5.1 CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Google Fonts: Inter & Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --brand-dark: #080e18;
+            --brand-card-bg: rgba(13, 22, 37, 0.90);
+            --brand-primary: #0284c7;
+            --brand-accent: #f59e0b;
+            --brand-border: rgba(255, 255, 255, 0.12);
+            --header-h: 58px;
+            --footer-h: 44px;
+        }
+
+        /* 100vh strict viewport-lock - Zero scroll at 100% zoom */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100vh;
+            width: 100vw;
+            margin: 0;
+            padding: 0;
+            overflow: hidden !important;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--brand-dark);
+            color: #f8fafc;
+        }
+
+        h1, h2, h3, h4, .brand-font {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .app-viewport {
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Header: Compact 58px bar */
+        .site-header {
+            height: var(--header-h);
+            background: rgba(8, 14, 24, 0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--brand-border);
+            z-index: 1030;
+            flex-shrink: 0;
+        }
+
+        .brand-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #0284c7, #0369a1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 10px rgba(2, 132, 199, 0.35);
+        }
+
+        .brand-title {
+            font-size: 1.05rem;
+            letter-spacing: 0.5px;
+            line-height: 1.1;
+        }
+
+        .brand-sub {
+            font-size: 0.65rem;
+            letter-spacing: 1px;
+            color: #94a3b8;
+        }
+
+        /* Circular Quick Action Icons in Header */
+        .quick-icon-btn {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 0.85rem;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            border: 1px solid var(--brand-border);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .quick-icon-btn:hover {
+            transform: translateY(-2px);
+            color: #ffffff;
+        }
+
+        .quick-icon-btn.call-btn:hover { background-color: #0284c7; border-color: #0284c7; }
+        .quick-icon-btn.wa-btn:hover { background-color: #25D366; border-color: #25D366; }
+        .quick-icon-btn.mail-btn:hover { background-color: #ea580c; border-color: #ea580c; }
+        .quick-icon-btn.map-btn:hover { background-color: #4285F4; border-color: #4285F4; }
+
+        /* Background Carousel */
+        .bg-carousel-container {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+        }
+
+        .bg-carousel-container .carousel-item {
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .carousel-overlay {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 40%, rgba(8, 14, 24, 0.75) 0%, rgba(6, 11, 19, 0.94) 85%);
+        }
+
+        /* Center Stage Area: Scaled for standard 100% desktop resolution */
+        .hero-center-stage {
+            position: relative;
+            z-index: 10;
+            flex: 1 1 auto;
+            height: calc(100vh - var(--header-h) - var(--footer-h));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0.75rem 1rem;
+        }
+
+        .hero-headline {
+            font-size: clamp(1.4rem, 2.4vw, 2.2rem);
+            line-height: 1.2;
+            margin-bottom: 0.35rem;
+        }
+
+        .hero-subtext {
+            font-size: clamp(0.78rem, 1vw, 0.88rem);
+            max-width: 640px;
+            color: #cbd5e1;
+            margin-bottom: 0;
+            line-height: 1.4;
+        }
+
+        /* Scaled-down, balanced dual cards */
+        .choice-card {
+            background: var(--brand-card-bg);
+            border: 1px solid var(--brand-border);
+            border-radius: 14px;
+            padding: 1rem 1.15rem;
+            backdrop-filter: blur(14px);
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            text-align: left;
+            position: relative;
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+        }
+
+        .choice-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: transparent;
+            transition: all 0.25s ease;
+        }
+
+        .choice-card.hire-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(2, 132, 199, 0.7);
+            box-shadow: 0 12px 28px rgba(2, 132, 199, 0.22);
+        }
+
+        .choice-card.hire-card::before {
+            background: linear-gradient(90deg, #0284c7, #38bdf8);
+        }
+
+        .choice-card.job-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(245, 158, 11, 0.7);
+            box-shadow: 0 12px 28px rgba(245, 158, 11, 0.22);
+        }
+
+        .choice-card.job-card::before {
+            background: linear-gradient(90deg, #f59e0b, #fbbf24);
+        }
+
+        .card-icon-pill {
+            width: 36px;
+            height: 36px;
+            border-radius: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.05rem;
+        }
+
+        .hire-card .card-icon-pill {
+            background: rgba(2, 132, 199, 0.18);
+            color: #38bdf8;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+        }
+
+        .job-card .card-icon-pill {
+            background: rgba(245, 158, 11, 0.18);
+            color: #fbbf24;
+            border: 1px solid rgba(251, 191, 36, 0.3);
+        }
+
+        .choice-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.15rem;
+        }
+
+        .choice-card .card-desc {
+            font-size: 0.78rem;
+            color: #cbd5e1;
+            line-height: 1.35;
+            margin-bottom: 0.65rem;
+        }
+
+        /* Coverage Tags */
+        .coverage-badge {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #cbd5e1;
+            font-size: 0.72rem;
+            font-weight: 500;
+            border-radius: 5px;
+            padding: 2px 7px;
+            white-space: nowrap;
+        }
+
+        /* Bottom Status Bar: 44px */
+        .site-footer {
+            height: var(--footer-h);
+            background: rgba(6, 11, 19, 0.96);
+            border-top: 1px solid var(--brand-border);
+            z-index: 1030;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            font-size: 0.76rem;
+        }
+
+        /* WhatsApp Button inside Modals */
+        .btn-modal-whatsapp {
+            background-color: #25D366;
+            color: #ffffff;
+            font-weight: 600;
+            border: none;
+            transition: all 0.2s;
+        }
+
+        .btn-modal-whatsapp:hover {
+            background-color: #1fa851;
+            color: #ffffff;
+        }
+
+        /* Dark Themed Modals */
+        .modal-content.dark-theme {
+            background-color: #0d1522;
+            border: 1px solid var(--brand-border);
+            color: #e2e8f0;
+            border-radius: 14px;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.75);
+        }
+
+        .modal-content.dark-theme .form-control,
+        .modal-content.dark-theme .form-select {
+            background-color: #142033;
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            color: #ffffff;
+            font-size: 0.84rem;
+            padding: 0.4rem 0.65rem;
+        }
+
+        .modal-content.dark-theme .form-control:focus,
+        .modal-content.dark-theme .form-select:focus {
+            background-color: #192a43;
+            border-color: #0284c7;
+            box-shadow: 0 0 0 0.15rem rgba(2, 132, 199, 0.25);
+            color: #ffffff;
+        }
+
+        .modal-content.dark-theme .btn-close {
+            filter: invert(1);
+        }
+
+        /* Slide indicators */
+        .carousel-indicators [data-bs-target] {
+            width: 18px;
+            height: 3px;
+            border-radius: 2px;
+            border: none;
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        .carousel-indicators .active {
+            width: 32px;
+            background-color: var(--brand-primary);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========================================================================= -->
+    <!-- ASP.NET Core MVC:                                                         -->
+    <!-- Header & Footer -> Views/Shared/_Layout.cshtml                            -->
+    <!-- Hero center stage & carousel -> Views/Home/Index.cshtml                   -->
+    <!-- ========================================================================= -->
+
+    <div class="app-viewport">
+
+        <!-- Top Header Panel (Clean, uncluttered, 58px) -->
+        <header class="site-header px-3 px-md-4">
+            <div class="container-fluid h-100 d-flex align-items-center justify-content-between p-0">
+                
+                <!-- Brand Title -->
+                <div class="d-flex align-items-center gap-2">
+                    <div class="brand-icon">
+                        <i class="fa-solid fa-people-roof"></i>
+                    </div>
+                    <div>
+                        <div class="brand-font fw-bold brand-title text-white">AANYA ENTERPRISE</div>
+                        <div class="brand-sub fw-semibold text-uppercase">
+                            INDUSTRIAL MANPOWER SOLUTIONS &bull; JAROD, VADODARA
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Action Icons (Call, WhatsApp, Mail, Google Business Profile) -->
+                <div class="d-flex align-items-center gap-2">
+                    <!-- Direct Call (+91 97124 49699) -->
+                    <a href="tel:+919712449699" class="quick-icon-btn call-btn" title="Call Now: +91 97124 49699" aria-label="Call">
+                        <i class="fa-solid fa-phone"></i>
+                    </a>
+
+                    <!-- Direct WhatsApp (+91 97124 49699) -->
+                    <a href="https://wa.me/919712449699?text=Hi!%20I%20visited%20your%20website.%20I%20would%20like%20to%20know%20more%20about%20AANYA%20ENTERPRISE%20services." 
+                       target="_blank" 
+                       rel="noopener noreferrer" 
+                       class="quick-icon-btn wa-btn" 
+                       title="Direct WhatsApp: +91 97124 49699" 
+                       aria-label="WhatsApp">
+                        <i class="fa-brands fa-whatsapp fs-6"></i>
+                    </a>
+
+                    <!-- Direct Email (mailto:aanyaenterprise05@gmail.com) -->
+                    <a href="mailto:aanyaenterprise05@gmail.com?subject=Inquiry%20for%20Aanya%20Enterprise" 
+                       class="quick-icon-btn mail-btn" 
+                       title="Email: aanyaenterprise05@gmail.com" 
+                       aria-label="Email">
+                        <i class="fa-regular fa-envelope"></i>
+                    </a>
+
+                    <!-- Google Business Profile Link -->
+                    <a href="https://share.google/gqwvIAkr4jrmYo7ok" 
+                       target="_blank" 
+                       rel="noopener noreferrer" 
+                       class="quick-icon-btn map-btn" 
+                       title="Google Business Profile & Location" 
+                       aria-label="Google Business Profile">
+                        <i class="fa-brands fa-google"></i>
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <!-- Ambient Background Carousel (5 Images) -->
+        <div class="bg-carousel-container">
+            <div id="ambientCarousel" class="carousel slide carousel-fade h-100" data-bs-ride="carousel" data-bs-interval="6000" data-bs-pause="false">
+                
+                <div class="carousel-indicators mb-2">
+                    <button type="button" data-bs-target="#ambientCarousel" data-bs-slide-to="0" class="active" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#ambientCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#ambientCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    <button type="button" data-bs-target="#ambientCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                    <button type="button" data-bs-target="#ambientCarousel" data-bs-slide-to="4" aria-label="Slide 5"></button>
+                </div>
+
+                <div class="carousel-inner h-100">
+                    <div class="carousel-item active" style="background-image: url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1920&q=80');">
+                        <div class="carousel-overlay"></div>
+                    </div>
+                    <div class="carousel-item" style="background-image: url('https://images.unsplash.com/photo-1516937941344-00b4e0337589?auto=format&fit=crop&w=1920&q=80');">
+                        <div class="carousel-overlay"></div>
+                    </div>
+                    <div class="carousel-item" style="background-image: url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1920&q=80');">
+                        <div class="carousel-overlay"></div>
+                    </div>
+                    <div class="carousel-item" style="background-image: url('https://images.unsplash.com/photo-1504917599217-d4dc5ebe6122?auto=format&fit=crop&w=1920&q=80');">
+                        <div class="carousel-overlay"></div>
+                    </div>
+                    <div class="carousel-item" style="background-image: url('https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=1920&q=80');">
+                        <div class="carousel-overlay"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Center Stage: Proportionate, Zero-Scroll Decision Core -->
+        <main class="hero-center-stage">
+            <div class="container text-center" style="max-width: 920px;">
+                
+                <!-- Headline Section -->
+                <div class="mb-2 mb-md-3">
+                    <span class="badge bg-primary bg-opacity-20 text-info border border-primary border-opacity-25 px-2 py-1 rounded-pill fw-medium mb-1" style="font-size: 0.72rem;">
+                        <i class="fa-solid fa-shield-halved me-1"></i> Trusted Labor Contractor &bull; 100% PF & ESIC Compliant
+                    </span>
+                    <h1 class="brand-font fw-bold text-white hero-headline">
+                        Connecting Industrial Plants with Dependable Workforce
+                    </h1>
+                    <p class="hero-subtext mx-auto">
+                        Delivering reliable contract manpower and verified factory workforce across Vadodara & Central Gujarat GIDCs. Select your requirement:
+                    </p>
+                </div>
+
+                <!-- Dual Action Highlighted Decision Cards -->
+                <div class="row g-3 justify-content-center my-1">
+                    
+                    <!-- 1. FOR PLANTS & HR (Get Manpower) -->
+                    <div class="col-md-6 col-lg-5">
+                        <div class="choice-card hire-card h-100" data-bs-toggle="modal" data-bs-target="#hireManpowerModal" role="button" tabindex="0">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <div class="card-icon-pill">
+                                    <i class="fa-solid fa-industry"></i>
+                                </div>
+                                <span class="badge bg-info bg-opacity-10 text-info border border-info border-opacity-25" style="font-size: 0.68rem;">
+                                    For Plants & HR
+                                </span>
+                            </div>
+
+                            <h3 class="brand-font fw-bold text-white">
+                                Get Manpower
+                            </h3>
+                            <div class="text-warning fw-semibold mb-2" style="font-size: 0.75rem;">
+                                કામદાર મેળવો &bull; Workforce On-Demand
+                            </div>
+                            
+                            <p class="card-desc">
+                                Order factory helpers, warehouse loading crews, packaging labor, or machine operators. Fast deployment with full statutory compliance.
+                            </p>
+
+                            <div class="d-flex align-items-center justify-content-between pt-2 border-top border-white border-opacity-10">
+                                <span class="text-info fw-semibold" style="font-size: 0.76rem;">
+                                    <i class="fa-solid fa-file-signature me-1"></i> Request Labor Quote
+                                </span>
+                                <span class="btn btn-sm btn-primary rounded-circle p-1 d-inline-flex align-items-center justify-content-center" style="width: 26px; height: 26px; font-size: 0.7rem;">
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. FOR WORKERS & CANDIDATES (Need a Job) -->
+                    <div class="col-md-6 col-lg-5">
+                        <div class="choice-card job-card h-100" data-bs-toggle="modal" data-bs-target="#jobSeekerModal" role="button" tabindex="0">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <div class="card-icon-pill">
+                                    <i class="fa-solid fa-id-badge"></i>
+                                </div>
+                                <span class="badge bg-warning bg-opacity-10 text-warning border border-warning border-opacity-25" style="font-size: 0.68rem;">
+                                    For Job Seekers
+                                </span>
+                            </div>
+
+                            <h3 class="brand-font fw-bold text-white">
+                                Need a Job
+                            </h3>
+                            <div class="text-warning fw-semibold mb-2" style="font-size: 0.75rem;">
+                                નોકરી મેળવો &bull; Register For Work
+                            </div>
+
+                            <p class="card-desc">
+                                Openings for helpers, packers, forklift drivers, machine technicians, and loaders. Daily wage and monthly salary roles with prompt payments.
+                            </p>
+
+                            <div class="d-flex align-items-center justify-content-between pt-2 border-top border-white border-opacity-10">
+                                <span class="text-warning fw-semibold" style="font-size: 0.76rem;">
+                                    <i class="fa-solid fa-user-plus me-1"></i> Register as Worker
+                                </span>
+                                <span class="btn btn-sm btn-warning rounded-circle p-1 d-inline-flex align-items-center justify-content-center text-dark" style="width: 26px; height: 26px; font-size: 0.7rem;">
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Industrial Coverage Strip -->
+                <div class="mt-3 pt-1">
+                    <div class="d-flex align-items-center justify-content-center gap-1 flex-wrap text-white-50" style="font-size: 0.72rem;">
+                        <span class="text-white fw-semibold me-1"><i class="fa-solid fa-location-dot text-danger me-1"></i>Serving GIDCs:</span>
+                        <span class="coverage-badge">Jarod</span>
+                        <span class="coverage-badge">Vadodara</span>
+                        <span class="coverage-badge">Manjusar</span>
+                        <span class="coverage-badge">Halol</span>
+                        <span class="coverage-badge">Por</span>
+                        <span class="coverage-badge">Makarpura</span>
+                        <span class="coverage-badge">Padra</span>
+                        <span class="coverage-badge">Godhra</span>
+                        <span class="coverage-badge">Chhotaudepur</span>
+                        <span class="coverage-badge">Ahmedabad</span>
+                        <span class="coverage-badge">Anand</span>
+                        <span class="coverage-badge">Nadiad</span>
+                        <span class="coverage-badge">Ujjain</span>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+        <!-- Compact Bottom Strip (44px) -->
+        <footer class="site-footer px-3 px-md-4">
+            <div class="container-fluid d-flex align-items-center justify-content-between p-0">
+                <div class="d-flex align-items-center gap-2 gap-md-3 text-secondary">
+                    <span class="text-light fw-medium"><i class="fa-solid fa-clock text-warning me-1"></i> 24x7 Shift Support</span>
+                    <span class="d-none d-md-inline">&bull;</span>
+                    <span class="d-none d-md-inline text-light"><i class="fa-solid fa-certificate text-success me-1"></i> 100% PF & ESIC Assured</span>
+                </div>
+
+                <div class="d-flex align-items-center gap-2 gap-md-3">
+                    <span class="text-secondary d-none d-sm-inline" style="font-size: 0.72rem;">
+                        Concept, Designed &amp; Developed by 
+                        <a href="https://bmcti.com/" target="_blank" rel="noopener noreferrer" class="text-info text-decoration-none fw-semibold">
+                            BMCTIPL
+                        </a>
+                    </span>
+                    <a href="tel:+919712449699" class="btn btn-sm btn-outline-light rounded-pill px-2 py-0 border-secondary" style="font-size: 0.72rem; line-height: 1.8;">
+                        <i class="fa-solid fa-headset text-warning me-1"></i> +91 97124 49699
+                    </a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- MODAL 1: FOR COMPANIES & PLANTS (Get Manpower)                             -->
+    <!-- Target Email: aanyaenterprise05@gmail.com & Applicant CC/Loop             -->
+    <!-- ========================================================================= -->
+    <div class="modal fade" id="hireManpowerModal" tabindex="-1" aria-labelledby="hireManpowerModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content dark-theme">
+                
+                <div class="modal-header border-secondary border-opacity-25 py-2 px-3">
+                    <div class="d-flex align-items-center gap-2">
+                        <div class="card-icon-pill" style="width: 32px; height: 32px; font-size: 0.95rem;">
+                            <i class="fa-solid fa-industry"></i>
+                        </div>
+                        <div>
+                            <h6 class="modal-title brand-font fw-bold text-white mb-0" id="hireManpowerModalLabel">Get Manpower Quotation</h6>
+                            <small class="text-secondary" style="font-size: 0.7rem;">Factories, Warehouses, Logistics & Contractors</small>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <!-- Instant WhatsApp Direct Option Banner (+91 97124 49699) -->
+                <div class="py-2 px-3 bg-dark bg-opacity-50 border-bottom border-secondary border-opacity-25 d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-2">
+                    <div class="small text-light" style="font-size: 0.8rem;">
+                        <i class="fa-brands fa-whatsapp text-success fs-6 me-1 align-middle"></i>
+                        <strong>Prefer Instant Chat?</strong> Message us directly on WhatsApp:
+                    </div>
+                    <a href="https://wa.me/919712449699?text=Hi!%20I%20visited%20your%20website.%20I%20Need%20Manpower,%20please%20send%20me%20Details" 
+                       target="_blank" 
+                       rel="noopener noreferrer" 
+                       class="btn btn-sm btn-modal-whatsapp rounded-pill px-3 py-1 text-nowrap d-inline-flex align-items-center gap-1 shadow-sm" style="font-size: 0.75rem;">
+                        <i class="fa-brands fa-whatsapp"></i> I Need Manpower
+                    </a>
+                </div>
+
+                <!-- Structured Submission Form (Binds to ASP.NET Core MVC Controller) -->
+                <form id="hireManpowerForm" onsubmit="event.preventDefault(); submitHireForm();">
+                    <!-- Hidden configuration for MVC / Mail processing -->
+                    <input type="hidden" name="DestinationEmail" value="aanyaenterprise05@gmail.com">
+
+                    <div class="modal-body py-2 px-3">
+                        <div class="row g-2">
+                            <div class="col-md-6">
+                                <label class="form-label small text-secondary mb-1">Company / Plant Name *</label>
+                                <input type="text" id="hireCompany" name="CompanyName" class="form-control" placeholder="e.g. ABC Engineering Ltd." required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small text-secondary mb-1">Contact Person & Designation *</label>
+                                <input type="text" id="hirePerson" name="ContactPerson" class="form-control" placeholder="e.g. Mr. Sharma (HR Head)" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small text-secondary mb-1">Official Email Address *</label>
+                                <input type="email" id="hireEmail" name="ClientEmail" class="form-control" placeholder="e.g. hr@company.com" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small text-secondary mb-1">Phone / WhatsApp Number *</label>
+                                <input type="tel" id="hirePhone" name="PhoneNumber" class="form-control" placeholder="e.g. +91 97124 XXXXX" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small text-secondary mb-1">Plant Location / GIDC Zone *</label>
+                                <select id="hireLocation" name="GidcLocation" class="form-select" required>
+                                    <option value="" selected disabled>Select Industrial Area</option>
+                                    <option value="Jarod">Jarod Industrial Area</option>
+                                    <option value="Manjusar / Savli GIDC">Manjusar / Savli GIDC</option>
+                                    <option value="Halol GIDC">Halol GIDC / Auto Zone</option>
+                                    <option value="Por GIDC">Por / Ramangamdi GIDC</option>
+                                    <option value="Makarpura GIDC">Makarpura GIDC (Vadodara)</option>
+                                    <option value="Padra">Padra Industrial Zone</option>
+                                    <option value="Godhra">Godhra Industrial Belt</option>
+                                    <option value="Chhotaudepur">Chhotaudepur</option>
+                                    <option value="Ahmedabad">Ahmedabad GIDC</option>
+                                    <option value="Anand / Nadiad">Anand / Nadiad</option>
+                                    <option value="Ujjain / Other">Ujjain / Other Regions</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small text-secondary mb-1">Manpower Type Required *</label>
+                                <select id="hireCategory" name="ManpowerType" class="form-select" required>
+                                    <option value="Unskilled Helpers">General Helpers / Unskilled</option>
+                                    <option value="Packaging & Sorting">Packaging, Labeling & Sorting Staff</option>
+                                    <option value="Warehouse & Forklift">Warehouse Crew & Forklift Operators</option>
+                                    <option value="Skilled Operators">Machine Operators / Turners / CNC / Welders</option>
+                                    <option value="Housekeeping Staff">Industrial Housekeeping Staff</option>
+                                    <option value="Mixed Labor Gang">Mixed Requirement (Helpers + Technicians)</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small text-secondary mb-1">Approx. Number of Workers *</label>
+                                <input type="number" id="hireWorkersCount" name="WorkerCount" min="1" class="form-control" placeholder="e.g. 15 workers" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small text-secondary mb-1">Shift Requirement</label>
+                                <input type="text" id="hireShift" name="ShiftDetails" class="form-control" placeholder="e.g. 8-hour / 12-hour rotating shift">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label small text-secondary mb-1">Additional Requirements / Notes</label>
+                                <textarea id="hireNotes" name="Notes" class="form-control" rows="2" placeholder="e.g. immediate deployment, transport needed, canteen facility..."></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Feedback Alert -->
+                        <div id="hireAlert" class="alert alert-success d-none mt-2 mb-0 py-1 px-2 small" role="alert">
+                            <i class="fa-solid fa-circle-check me-1"></i> Inquiry recorded! Preparing structured email to <strong>aanyaenterprise05@gmail.com</strong>...
+                        </div>
+                    </div>
+
+                    <div class="modal-footer border-secondary border-opacity-25 py-2 px-3">
+                        <button type="button" class="btn btn-sm btn-outline-secondary text-white" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" id="hireSubmitBtn" class="btn btn-sm btn-primary px-3 fw-semibold">
+                            <i class="fa-solid fa-paper-plane me-1"></i> Submit Requirement
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- MODAL 2: FOR JOB SEEKERS (Need a Job / નોકરી મેળવો)                        -->
+    <!-- Target Email: aanyaenterprise05@gmail.com & Applicant CC/Loop             -->
+    <!-- ========================================================================= -->
+    <div class="modal fade" id="jobSeekerModal" tabindex="-1" aria-labelledby="jobSeekerModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content dark-theme">
+                
+                <div class="modal-header border-secondary border-opacity-25 py-2 px-3">
+                    <div class="d-flex align-items-center gap-2">
+                        <div class="card-icon-pill" style="width: 32px; height: 32px; font-size: 0.95rem; background: rgba(245, 158, 11, 0.18); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.3);">
+                            <i class="fa-solid fa-id-badge"></i>
+                        </div>
+                        <div>
+                            <h6 class="modal-title brand-font fw-bold text-white mb-0" id="jobSeekerModalLabel">Join Workforce &bull; નોકરી મેળવો</h6>
+                            <small class="text-warning fw-medium" style="font-size: 0.7rem;">Free Registration &bull; મફત રજીસ્ટ્રેશન</small>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <!-- Instant WhatsApp Direct Option Banner (+91 97124 49699) -->
+                <div class="py-2 px-3 bg-dark bg-opacity-50 border-bottom border-secondary border-opacity-25 d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-2">
+                    <div class="small text-light" style="font-size: 0.8rem;">
+                        <i class="fa-brands fa-whatsapp text-success fs-6 me-1 align-middle"></i>
+                        <strong>WhatsApp પર સીધો સંપર્ક કરો:</strong>
+                    </div>
+                    <a href="https://wa.me/919712449699?text=Hi!%20I%20visited%20your%20website.%20I%20Need%20Job" 
+                       target="_blank" 
+                       rel="noopener noreferrer" 
+                       class="btn btn-sm btn-modal-whatsapp rounded-pill px-3 py-1 text-nowrap d-inline-flex align-items-center gap-1 shadow-sm" style="font-size: 0.75rem;">
+                        <i class="fa-brands fa-whatsapp"></i> I Need Job
+                    </a>
+                </div>
+
+                <!-- Simple, worker-friendly application form -->
+                <form id="jobSeekerForm" onsubmit="event.preventDefault(); submitJobForm();">
+                    <!-- Hidden configuration for MVC / Mail processing -->
+                    <input type="hidden" name="DestinationEmail" value="aanyaenterprise05@gmail.com">
+
+                    <div class="modal-body py-2 px-3">
+                        <div class="row g-2">
+                            <div class="col-12">
+                                <label class="form-label small text-secondary mb-1">તમારું પૂરું નામ / Full Name *</label>
+                                <input type="text" id="jobName" name="CandidateName" class="form-control" placeholder="e.g. Ramesh Bhai Patel" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small text-secondary mb-1">મોબાઈલ નંબર / Mobile *</label>
+                                <input type="tel" id="jobPhone" name="CandidatePhone" class="form-control" placeholder="e.g. 97124 XXXXX" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small text-secondary mb-1">ઈમેઈલ / Email (Optional)</label>
+                                <input type="email" id="jobEmail" name="CandidateEmail" class="form-control" placeholder="e.g. ramesh@gmail.com">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small text-secondary mb-1">ગામ / શહેર (City/Village) *</label>
+                                <input type="text" id="jobCity" name="CandidateCity" class="form-control" placeholder="e.g. Jarod / Vadodara / Halol" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small text-secondary mb-1">કયા કામનો અનુભવ છે? (Skill) *</label>
+                                <select id="jobSkill" name="CandidateSkill" class="form-select" required>
+                                    <option value="" selected disabled>પસંદ કરો / Select</option>
+                                    <option value="General Helper">હેલ્પર / General Helper (Unskilled)</option>
+                                    <option value="Loading Unloading">માલ લોડિંગ / Unloading</option>
+                                    <option value="Packaging">પેકિંગ / Packaging & Sorting</option>
+                                    <option value="Machine Operator">મશીન ઓપરેટર / Machine Operator</option>
+                                    <option value="Forklift Driver">ફોર્કલિફ્ટ ડ્રાઈવર / Forklift Driver</option>
+                                    <option value="Electrician/Fitter">ઇલેક્ટ્રિશિયન / ફિટર / વેલ્ડર</option>
+                                    <option value="Housekeeping">હાઉસકીપિંગ / સફાઈ કામ</option>
+                                    <option value="Any Work">કોઈપણ કામ ચાલશે / Any Work</option>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label small text-secondary mb-1">કઈ જગ્યાએ કામ કરવું છે? (Preferred GIDC)</label>
+                                <select id="jobPreferredLocation" name="PreferredGidc" class="form-select">
+                                    <option value="Jarod">Jarod</option>
+                                    <option value="Savli Manjusar GIDC">Savli / Manjusar GIDC</option>
+                                    <option value="Halol GIDC">Halol GIDC</option>
+                                    <option value="Vadodara / Makarpura">Vadodara / Makarpura</option>
+                                    <option value="Por GIDC">Por GIDC</option>
+                                    <option value="Any Location">કોઈપણ જગ્યાએ (Any GIDC)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Feedback Alert -->
+                        <div id="jobAlert" class="alert alert-success d-none mt-2 mb-0 py-1 px-2 small" role="alert">
+                            <i class="fa-solid fa-circle-check me-1"></i> નોંધણી સફળ! HR ટીમ તમને જલ્દી ફોન કરશે.
+                        </div>
+                    </div>
+
+                    <div class="modal-footer border-secondary border-opacity-25 py-2 px-3">
+                        <button type="button" class="btn btn-sm btn-outline-secondary text-white" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" id="jobSubmitBtn" class="btn btn-sm btn-warning px-3 fw-bold text-dark">
+                            <i class="fa-solid fa-paper-plane me-1"></i> Submit / નોંધાવો
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5.3.3 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Keyboard navigation for ambient carousel
+        document.addEventListener('keydown', function (e) {
+            const ambientCarousel = document.getElementById('ambientCarousel');
+            const instance = bootstrap.Carousel.getInstance(ambientCarousel) || new bootstrap.Carousel(ambientCarousel);
+            if (e.key === 'ArrowLeft') instance.prev();
+            if (e.key === 'ArrowRight') instance.next();
+        });
+
+        const OFFICIAL_EMAIL = "aanyaenterprise05@gmail.com";
+
+        // 1. Company Form: Sends structured mail to aanyaenterprise05@gmail.com and CCs the client
+        function submitHireForm() {
+            const btn = document.getElementById('hireSubmitBtn');
+            const alertBox = document.getElementById('hireAlert');
+            
+            const company = document.getElementById('hireCompany').value;
+            const person = document.getElementById('hirePerson').value;
+            const email = document.getElementById('hireEmail').value;
+            const phone = document.getElementById('hirePhone').value;
+            const location = document.getElementById('hireLocation').value;
+            const category = document.getElementById('hireCategory').value;
+            const count = document.getElementById('hireWorkersCount').value;
+            const shift = document.getElementById('hireShift').value || 'Not specified';
+            const notes = document.getElementById('hireNotes').value || 'None';
+
+            btn.disabled = true;
+            btn.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span> Processing...';
+
+            setTimeout(() => {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fa-solid fa-check me-1"></i> Recorded';
+                alertBox.classList.remove('d-none');
+
+                const subject = encodeURIComponent(`[New Manpower Inquiry] - ${company} (${location})`);
+                const body = encodeURIComponent(
+                    `==================================================\n` +
+                    `AANYA ENTERPRISE - MANPOWER REQUIREMENT INQUIRY\n` +
+                    `==================================================\n\n` +
+                    `Company / Plant Name: ${company}\n` +
+                    `Contact Person:       ${person}\n` +
+                    `Client Email:         ${email}\n` +
+                    `Phone / WhatsApp:     ${phone}\n` +
+                    `GIDC Location:        ${location}\n` +
+                    `Category of Labor:    ${category}\n` +
+                    `Workers Required:     ${count}\n` +
+                    `Shift Details:        ${shift}\n` +
+                    `Notes / Instructions: ${notes}\n\n` +
+                    `--------------------------------------------------\n` +
+                    `Both Client (${email}) and Aanya Enterprise\n` +
+                    `(${OFFICIAL_EMAIL}) are kept in this loop.\n` +
+                    `==================================================`
+                );
+                
+                // Triggers mail client with cc to applicant so both parties are in the loop
+                window.location.href = `mailto:${OFFICIAL_EMAIL}?cc=${encodeURIComponent(email)}&subject=${subject}&body=${body}`;
+
+                setTimeout(() => {
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('hireManpowerModal'));
+                    if (modal) modal.hide();
+                    document.getElementById('hireManpowerForm').reset();
+                    alertBox.classList.add('d-none');
+                    btn.innerHTML = '<i class="fa-solid fa-paper-plane me-1"></i> Submit Requirement';
+                }, 2000);
+            }, 400);
+        }
+
+        // 2. Worker Form: Sends candidate registration to aanyaenterprise05@gmail.com
+        function submitJobForm() {
+            const btn = document.getElementById('jobSubmitBtn');
+            const alertBox = document.getElementById('jobAlert');
+
+            const name = document.getElementById('jobName').value;
+            const phone = document.getElementById('jobPhone').value;
+            const email = document.getElementById('jobEmail').value || '';
+            const city = document.getElementById('jobCity').value;
+            const skill = document.getElementById('jobSkill').value;
+            const pref = document.getElementById('jobPreferredLocation').value;
+
+            btn.disabled = true;
+            btn.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span> નોંધણી થાય છે...';
+
+            setTimeout(() => {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fa-solid fa-check me-1"></i> સફળ';
+                alertBox.classList.remove('d-none');
+
+                const subject = encodeURIComponent(`[Candidate Registration] - ${name} (${skill})`);
+                const body = encodeURIComponent(
+                    `==================================================\n` +
+                    `AANYA ENTERPRISE - NEW WORKER REGISTRATION\n` +
+                    `==================================================\n\n` +
+                    `Worker Name:          ${name}\n` +
+                    `Mobile Number:        ${phone}\n` +
+                    `Candidate Email:      ${email ? email : 'Not Provided'}\n` +
+                    `Current City/Village: ${city}\n` +
+                    `Trade / Skill:        ${skill}\n` +
+                    `Preferred GIDC:       ${pref}\n\n` +
+                    `--------------------------------------------------\n` +
+                    `Official Destination: ${OFFICIAL_EMAIL}\n` +
+                    `==================================================`
+                );
+
+                const ccParam = email ? `?cc=${encodeURIComponent(email)}&` : '?';
+                window.location.href = `mailto:${OFFICIAL_EMAIL}${ccParam}subject=${subject}&body=${body}`;
+
+                setTimeout(() => {
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('jobSeekerModal'));
+                    if (modal) modal.hide();
+                    document.getElementById('jobSeekerForm').reset();
+                    alertBox.classList.add('d-none');
+                    btn.innerHTML = '<i class="fa-solid fa-paper-plane me-1"></i> Submit / નોંધાવો';
+                }, 2000);
+            }, 400);
+        }
+    </script>
+
+<!--
+===================================================================================
+ASP.NET CORE MVC C# IMPLEMENTATION GUIDE (Both Parties in the Loop)
+===================================================================================
+
+1. In your MVC Controller (e.g. `HomeController.cs`):
+
+   [HttpPost]
+   [ValidateAntiForgeryToken]
+   public async Task<IActionResult> SubmitHireInquiry(HireInquiryModel model, [FromServices] IEmailService emailService)
+   {
+       if (!ModelState.IsValid) return View("Index");
+
+       // Format HTML / Text content
+       string adminSubject = $"[New Inquiry] {model.CompanyName} - {model.GidcLocation}";
+       string bodyHtml = $@"
+           <h2>New Manpower Inquiry</h2>
+           <p><strong>Company:</strong> {model.CompanyName}</p>
+           <p><strong>Contact Person:</strong> {model.ContactPerson}</p>
+           <p><strong>Email:</strong> {model.ClientEmail}</p>
+           <p><strong>Phone:</strong> {model.PhoneNumber}</p>
+           <p><strong>Location:</strong> {model.GidcLocation}</p>
+           <p><strong>Category:</strong> {model.ManpowerType}</p>
+           <p><strong>Workers Count:</strong> {model.WorkerCount}</p>
+           <p><strong>Shift Details:</strong> {model.ShiftDetails}</p>
+           <p><strong>Notes:</strong> {model.Notes}</p>";
+
+       // 1. Send to Official Inbox
+       await emailService.SendEmailAsync("aanyaenterprise05@gmail.com", adminSubject, bodyHtml);
+
+       // 2. Send instant confirmation receipt to the Client Email to keep everyone in the loop
+       string clientSubject = "Thank you for contacting AANYA ENTERPRISE";
+       string clientConfirmation = $@"
+           <p>Dear {model.ContactPerson},</p>
+           <p>We have received your request for {model.WorkerCount} {model.ManpowerType} at {model.GidcLocation}.</p>
+           <p>Our operations team will contact you shortly on {model.PhoneNumber}.</p>
+           <br><p>Regards,<br><strong>AANYA ENTERPRISE</strong><br>Jarod, Vadodara | Phone: +91 97124 49699</p>";
+       
+       await emailService.SendEmailAsync(model.ClientEmail, clientSubject, clientConfirmation);
+
+       return Json(new { success = true });
+   }
+
+2. Configure SMTP in `appsettings.json`:
+   "SmtpSettings": {
+     "Host": "smtp.gmail.com",
+     "Port": 587,
+     "SenderEmail": "aanyaenterprise05@gmail.com",
+     "SenderName": "Aanya Enterprise Manpower",
+     "Password": "YOUR_GMAIL_APP_PASSWORD"
+   }
+===================================================================================
+-->
+</body>
+</html>
